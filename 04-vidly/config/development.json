@@ -1,0 +1,7 @@
+{
+    "name": "Mi aplicación - development",
+    "mail": {
+        "smpt": "test.mail.com",
+        "user": "mail@mail.com"
+    }
+}

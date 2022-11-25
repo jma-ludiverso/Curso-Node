@@ -1,0 +1,44 @@
+Instalar una versión específica de NPM:
+	npm i -g npm@5.5.1
+
+	-g 	para instalar en la máquina y no específico a una aplicación
+		el parámetro es válido para la mayoría de los comandos que se listan a continuación
+
+Instalar paquetes para revisar updates del resto de paquetes:
+	npm i -g npm-check-updates	(comando ncu)
+
+Restaurar las dependencias de un proyecto
+	npm i
+
+Inicializar package.json en un proyecto:
+	npm init --yes
+	
+	-yes para utilizar opciones por defecto
+
+Instalar un paquete NPM:
+	npm i [nombredelpaquete]
+	npm i [nombredelpaquete]@2.4.2	para instalar una versión específica
+	npm i [nombredelpaquete] --save-dev para instalar paquete sólo para entorno desarrollo
+	npm un [nombredelpaquete] para desinstalar un paquete
+	
+
+Listar / revisar / actualizar paquetes instalados:
+	npm list --depth=0
+		
+	--depth=0 para no mostrar a su vez las dependencias de cada paquete
+	
+	npm outdated	para listar paquetes sin actualizar
+	npm -g outdated	para listar paquetes globales sin actualizar
+	ncu				para listar paquetes sin actualizar
+	npm update		para actualizar los paquetes (no major updates)
+	ncu -u			actualizar packages.json (debe hacerse npm i después para restaurar las dependencias)
+
+Ver distintas informaciones de un paquete:
+	npm view [nombredelpaquete] dependencies
+	npm view [nombredelpaquete] versions
+
+Registrar / actualizar tu propio paquete npm:
+	npm login 	para acceder al repositorio
+	npm publish	para publicar o actualizar un paquete
+	npm version [major][minor][patch]	para actualizar la versión del paquete
+	
