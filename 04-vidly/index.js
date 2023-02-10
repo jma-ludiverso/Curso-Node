@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const startupDebugger = require('debug')('app:startup');
 const dbDebugger = require('debug')('app:db');
 const config = require('config');
@@ -5,10 +6,10 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const logger = require('./middleware/logger');
 const authenticator = require('./authenticator');
+const customers = require('./routes/customers');
 const genres = require('./routes/genres');
 const def = require('./routes/default');
 const express = require('express');
-const Joi = require('joi');
 const app = express();
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
@@ -19,6 +20,7 @@ app.use(express.urlencoded( { extended: true}));
 //para servir contenido estático (css, imagenes, etc ..)
 app.use(express.static('public'));
 app.use(helmet());
+app.use('/api/customers', customers);
 app.use('/api/genres', genres); // para cualquier /api/genres usar el router genres
 app.use('/', def);
 
@@ -32,6 +34,10 @@ if(app.get('env') === 'development'){
     //console.log('Morgan enabled');
     startupDebugger('Morgan enabled ...')   //console.log
 }
+
+mongoose.connect('mongodb://127.0.0.1/vidly')
+    .then(() => console.log('Connected to mongoDB'))
+    .catch( err => console.log('Could not connect ...',err));
 
 //db work ....
 //(aplicando a la variable de entorno DEBUG=app:startup, DEBUG=app:db o DEBUG=app:startup,app:db; utilizaremos dos, uno o ningun logger)
